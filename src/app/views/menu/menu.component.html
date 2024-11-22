@@ -1,0 +1,61 @@
+<div class="menu-header">
+    <button class="menu-boton" (click)="toggleMenu()">☰</button>
+    <div class="menu-opciones" *ngIf="mostrarMenu">
+      <ul>
+        <li><button (click)="irAPerfil()">Perfil</button></li>
+        <li><button (click)="irAListaPedidos()">Lista de Pedidos</button></li>
+      </ul>
+    </div>
+  </div>
+  
+  <form (ngSubmit)="agregarPlatillo()">
+    <div>
+      <label for="nombre">Nombre:</label>
+      <input id="nombre" type="text" [(ngModel)]="nuevoPlatillo.nombre" name="nombre" required />
+    </div>
+    <div>
+      <label for="descripcion">Descripción:</label>
+      <input id="descripcion" type="text" [(ngModel)]="nuevoPlatillo.descripcion" name="descripcion" />
+    </div>
+    <div>
+      <label for="precio">Precio:</label>
+      <input id="precio" type="number" [(ngModel)]="nuevoPlatillo.precio" name="precio" required />
+    </div>
+    <div>
+      <label for="categoria">Categoría:</label>
+      <select id="categoria" [(ngModel)]="nuevoPlatillo.categoria" name="categoria" required>
+        <option value="comida rapida">Comida Rápida</option>
+        <option value="postre">Postre</option>
+        <option value="pasta">Pasta</option>
+        <option value="plato fuerte">Plato Fuerte</option>
+        <option value="bebidas">Bebidas</option>
+      </select>
+    </div>
+    <div>
+      <label for="imagen">Imagen (URL):</label>
+      <input id="imagen" type="text" [(ngModel)]="nuevoPlatillo.imagen" name="imagen" />
+    </div>
+    Estado:
+    <select [(ngModel)]="nuevoPlatillo.estado" name="estado">
+      <option [value]="true">Disponible</option>
+      <option [value]="false">No disponible</option>
+    </select>
+    <button type="submit">Agregar Platillo</button>
+  </form>
+
+  <h3>Lista de Platillos</h3>
+  <ul>
+    <li *ngFor="let platillo of obtenerPlatillos(); let i = index">
+
+      <h4>{{ platillo.nombre }}</h4>
+      <div>
+        <img [src]="platillo.imagen" alt="Imagen del platillo" width="200" height="150" *ngIf="platillo.imagen" />
+      </div>
+      <p>{{ platillo.descripcion }}</p>
+      <p>Precio: {{ platillo.precio | currency }}</p>
+      <p>Categoría: {{ platillo.categoria }}</p>
+      <p>Disponible: {{ platillo.estado ? 'Sí' : 'No' }}</p>
+
+      <button (click)="eliminarPlatillo(i)">Eliminar</button>
+    </li>
+  </ul>

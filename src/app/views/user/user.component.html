@@ -1,0 +1,27 @@
+<div class="menu-header">
+  <button class="menu-boton" (click)="toggleMenu()">☰</button>
+  <div class="menu-opciones" *ngIf="mostrarMenu">
+    <ul>
+      <li>
+        <button (click)="irAPedidos()">Pedidos</button>
+      </li>
+      <li>
+        <button (click)="irAHistorialPedidos()">Historial de pedidos</button>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="user-container">
+  <h2>Bienvenido, {{ usuario.nombre }}</h2>
+  <div class="user-info">
+    <p><strong>Email:</strong> {{ usuario.email }}</p>
+    <p><strong>Teléfono:</strong> {{ usuario.telefono }}</p>
+    <p><strong>Dirección:</strong> {{ usuario.direccion }}</p>
+  </div>
+</div>
+
+<div class="acciones">
+  <button class="btn-editar" (click)="irAEditarPerfil()">Editar Perfil</button>
+  <button class="btn-cerrar" (click)="cerrarSesion()">Cerrar Sesión</button>
+</div>

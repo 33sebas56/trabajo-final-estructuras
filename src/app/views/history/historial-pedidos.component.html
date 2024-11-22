@@ -1,0 +1,9 @@
+<div class="historial-pedidos">
+  <h2>Historial de Pedidos</h2>
+  <ul class="lista-historial">
+    <li *ngFor="let pedido of pedidosUsuario" class="item-historial">
+      <strong class="nombre-pedido">{{ pedido.nombre }}</strong> 
+      <span class="descripcion-pedido">- {{ pedido.descripcion }}</span>
+    </li>
+  </ul>
+</div>

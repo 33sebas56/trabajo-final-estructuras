@@ -1,0 +1,51 @@
+<div class="menu-header">
+  <button class="menu-boton" (click)="toggleMenu()">☰</button>
+  <div class="menu-opciones" *ngIf="mostrarMenu">
+    <ul>
+      <li><button (click)="irAPerfil()">Mi Perfil</button></li>
+      <li><button (click)="irAHistorialPedidos()">historial de pedidos</button></li>
+    </ul>
+  </div>
+</div>
+
+<div class="pedidos-contenedor">
+  <h2>Realiza tu Pedido</h2>
+
+  <!-- Filtro por categoría -->
+  <select id="categoria" [(ngModel)]="categoriaSeleccionada" (change)="filtrarPorCategoria()">
+    <option *ngFor="let categoria of categorias" [value]="categoria">
+      {{ categoria }}
+    </option>
+  </select>
+
+  <!-- Lista de platillos filtrados -->
+  <div class="lista-platillos">
+    <h3>Platillos disponibles</h3>
+    <ul>
+      <li *ngFor="let platillo of platillosFiltrados">
+        <h4>{{ platillo.nombre }}</h4>
+        <img [src]="platillo.imagen" alt="Imagen de {{ platillo.nombre }}" class="platillo-imagen" />
+        <p>{{ platillo.descripcion }}</p>
+        <p>Precio: {{ platillo.precio | currency }}</p>
+        <p>Categoría: {{ platillo.categoria }}</p>
+        <div>
+          <input type="number" min="1" [(ngModel)]="platillo.cantidad" placeholder="Cantidad" />
+          <button (click)="agregarAlCarrito(platillo)">Añadir al carrito</button>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Carrito de compras -->
+  <div class="carrito">
+    <h3>Carrito</h3>
+    <ul>
+      <li *ngFor="let item of carrito; let i = index">
+        {{ item.cantidad }}x {{ item.platillo.nombre }} - 
+        Total: {{ item.cantidad * item.platillo.precio | currency }}
+        <button (click)="eliminarDelCarrito(i)">Quitar</button>
+      </li>
+    </ul>
+    <button (click)="registrarPedidos()" [disabled]="carrito.length === 0">Registrar pedidos</button>
+  </div>
+</div>

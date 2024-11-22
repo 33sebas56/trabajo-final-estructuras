@@ -1,0 +1,44 @@
+<div class="menu-header">
+  <button class="menu-boton" (click)="toggleMenu()">☰</button>
+  <div class="menu-opciones" *ngIf="mostrarMenu">
+    <ul>
+      <li><button (click)="irAMenu()">Gestor de menú</button></li>
+      <li><button (click)="irAPerfil()">Perfil</button></li>
+    </ul>
+  </div>
+</div>
+
+<div class="lista-pedidos">
+  <h2>Lista de Pedidos</h2>
+  <ul *ngIf="pedidos.length > 0; else noPedidos" class="lista-pedidos-ul">
+    <li 
+      *ngFor="let pedido of pedidos"
+      class="pedido-item"
+      [ngClass]="{
+        'en-espera': pedido.estado === 'En espera',
+        'cocinando': pedido.estado === 'Cocinando',
+        'finalizado': pedido.estado === 'Finalizado',
+        'cancelado': pedido.estado === 'Cancelado'
+      }"
+    >
+      <div class="info-pedido">
+        <strong class="nombre-pedido">{{ pedido.nombre }}</strong> 
+        <span class="descripcion-pedido">- {{ pedido.descripcion }}</span>
+        <span class="precio-pedido">- ${{ pedido.precio }}</span>
+      </div>
+      <span *ngIf="pedido.usuarioId" class="usuario-pedido">(Usuario: {{ pedido.usuarioId }})</span>
+      <p class="estado-pedido">Estado: <strong>{{ pedido.estado }}</strong></p>
+      
+      <!-- Botones para cambiar el estado -->
+      <div class="botones-estado">
+        <button (click)="cambiarEstado(pedido, 'En espera')" class="btn-estado espera">En espera</button>
+        <button (click)="cambiarEstado(pedido, 'Cocinando')" class="btn-estado cocinando">Cocinando</button>
+        <button (click)="cambiarEstado(pedido, 'Finalizado')" class="btn-estado finalizado">Finalizado</button>
+        <button (click)="cambiarEstado(pedido, 'Cancelado')" class="btn-estado cancelado">Cancelado</button>
+      </div>
+    </li>
+  </ul>
+  <ng-template #noPedidos>
+    <p class="sin-pedidos">No hay pedidos registrados aún.</p>
+  </ng-template>
+</div>

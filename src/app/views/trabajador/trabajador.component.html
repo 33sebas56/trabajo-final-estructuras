@@ -1,0 +1,24 @@
+<div class="menu-header">
+  <button class="menu-boton" (click)="toggleMenu()">☰</button>
+  <div class="menu-opciones" [ngClass]="{ 'mostrar': mostrarMenu }">
+    <ul>
+      <li><button (click)="irAGestionarMenu()">Gestionar Menú</button></li>
+      <li><button (click)="irAListarPedidos()">Lista de Pedidos</button></li>
+    </ul>
+  </div>
+</div>
+
+<div class="contenido">
+  <div class="perfil">
+    <h2>Información del Perfil</h2>
+    <p><strong>Nombre:</strong> {{ trabajador.nombre || 'No definido' }}</p>
+    <p><strong>Profesión:</strong> {{ trabajador.profesion || 'No definido' }}</p>
+    <p><strong>Edad:</strong> {{ trabajador.edad || 'No definida' }}</p>
+    <p><strong>Comentario:</strong> {{ trabajador.comentario || 'No definido' }}</p>
+  </div>
+
+  <div class="acciones">
+    <button (click)="irAEditarPerfil()" class="btn-primario">Editar Perfil</button>
+    <button (click)="cerrarSesion()" class="btn-secundario">Cerrar Sesión</button>
+  </div>
+</div>

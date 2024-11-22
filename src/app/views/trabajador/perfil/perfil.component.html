@@ -1,0 +1,30 @@
+<div class="perfil-contenedor">
+  <h2>Editar Perfil</h2>
+
+  <form (ngSubmit)="guardarCambios()">
+    <div class="form-grupo">
+      <label for="nombre">Nombre:</label>
+      <input id="nombre" type="text" [(ngModel)]="trabajador.nombre" name="nombre" required />
+    </div>
+
+    <div class="form-grupo">
+      <label for="profesion">Profesión:</label>
+      <input id="profesion" type="text" [(ngModel)]="trabajador.profesion" name="profesion" />
+    </div>
+
+    <div class="form-grupo">
+      <label for="edad">Edad:</label>
+      <input id="edad" type="number" [(ngModel)]="trabajador.edad" name="edad" />
+    </div>
+
+    <div class="form-grupo">
+      <label for="comentario">Comentario:</label>
+      <textarea id="comentario" [(ngModel)]="trabajador.comentario" name="comentario"></textarea>
+    </div>
+
+    <div class="acciones">
+      <button type="submit" class="btn-guardar">Guardar Cambios</button>
+      <button type="button" class="btn-cancelar" (click)="volver()">Cancelar</button>
+    </div>
+  </form>
+</div>
